@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --snap-yellow: #FFFC00;
+    --snap-blue: #0fadff;
+    --snap-dark: #1a1a2e;
+    --snap-darker: #16213e;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-snap-darkest text-white antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/20;
+  }
+}
+
+@layer components {
+  /* Glass Effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  /* Premium Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #FFFC00 0%, #FF6B35 50%, #FF1493 100%);
+  }
+
+  .gradient-text-blue {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #0fadff 0%, #9b59b6 100%);
+  }
+
+  /* Neon Glow */
+  .neon-yellow {
+    text-shadow: 0 0 10px rgba(255, 252, 0, 0.5), 0 0 40px rgba(255, 252, 0, 0.2);
+  }
+
+  .neon-blue {
+    text-shadow: 0 0 10px rgba(15, 173, 255, 0.5), 0 0 40px rgba(15, 173, 255, 0.2);
+  }
+
+  /* 3D Card Effect */
+  .card-3d {
+    transform: perspective(1000px) rotateX(0deg);
+    transition: transform 0.3s ease;
+  }
+
+  .card-3d:hover {
+    transform: perspective(1000px) rotateX(2deg) translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Shimmer Loading */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Story Ring */
+  .story-ring {
+    background: conic-gradient(
+      #FFFC00,
+      #FF6B35,
+      #FF1493,
+      #9b59b6,
+      #0fadff,
+      #FFFC00
+    );
+    padding: 2px;
+    border-radius: 50%;
+  }
+
+  .story-ring-seen {
+    background: conic-gradient(
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.2)
+    );
+    padding: 2px;
+    border-radius: 50%;
+  }
+
+  /* Snap Button */
+  .snap-button {
+    @apply relative;
+  }
+
+  .snap-button::before {
+    content: '';
+    @apply absolute inset-0 rounded-full;
+    background: conic-gradient(#FFFC00, #FF6B35, #FF1493, #FFFC00);
+    animation: spin 3s linear infinite;
+  }
+
+  .snap-button::after {
+    content: '';
+    @apply absolute rounded-full;
+    inset: 3px;
+    background: #1a1a2e;
+  }
+
+  /* Page Transitions */
+  .page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+  }
+
+  .page-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .page-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 200ms ease-in, transform 200ms ease-in;
+  }
+
+  /* Safe Area */
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 80px);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mask-fade-bottom {
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
+}
