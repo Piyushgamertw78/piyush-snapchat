@@ -29,13 +29,11 @@ jobs:
       - name: 🤖 Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: 📦 Install dependencies
+      - name: 📦 Install base dependencies (npm ci)
         run: npm ci
 
-      - name: 📦 Install Capacitor
-        run: |
-          npm install --save @capacitor/core @capacitor/android
-          npm install --save-dev @capacitor/cli
+      - name: 📦 Install Capacitor (runtime add, no lockfile required)
+        run: npm install --no-save @capacitor/core@6 @capacitor/android@6 @capacitor/cli@6
 
       - name: 🏗️ Build Next.js (static export)
         run: npm run build
